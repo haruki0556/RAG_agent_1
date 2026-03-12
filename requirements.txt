@@ -1,0 +1,10 @@
+chainlit==2.9.6
+langgraph==1.0.10
+langchain-google-genai==4.2.1
+python-dotenv==1.2.2
+langchain
+langchain_community
+pydantic
+faiss-cpu
+pymupdf
+pypdf
