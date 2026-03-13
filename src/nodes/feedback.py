@@ -15,9 +15,11 @@ def feedback(state:GraphState) -> Command:
     search_results = state["search_results"]
     iteration = state.get("iteration",0)
 
-    if iteration >= 3:
+    if iteration >= 2:#最大反復回数は2回、3回にするとembeddingの上限に引っかかる
         print("\n最大反復回数に達しました。")
-        return Command(goto=END)
+        return Command(
+            goto=END#終了
+        )
 
 
     context = "\n\n".join([f"文書{i+1}:\n{doc}" for i,doc in enumerate(search_results)])

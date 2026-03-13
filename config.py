@@ -17,3 +17,4 @@ CHUNK_OVERLAP = 200 #チャンクオーバーラップ
 MAX_LOOP_COUNT = 3 #ループ回数の最大値
 SEARCH_K = 3 #検索結果の最大値
 FILE_NAME = "data/rakusu_brexa.pdf"
+N = 9 #ランキングの最大値   

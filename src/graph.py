@@ -10,6 +10,7 @@ from src.nodes.query import generate_queries
 from src.nodes.retrieve import vector_search
 from src.nodes.generate import generate_answer
 from src.nodes.feedback import feedback
+from src.nodes.ranking import ranking
 
 
 
@@ -23,11 +24,12 @@ def create_rag_graph(vectorStore):
 
     graph.add_node("generate_queries",generate_queries)
     graph.add_node("vector_search",vector_search_with_store)
+    graph.add_node("ranking",ranking)
     graph.add_node("generate_answer",generate_answer)
     graph.add_node("feedback",feedback)
 
     graph.add_edge(START,"generate_queries")
-    graph.add_edge("vector_search","generate_answer")
+    graph.add_edge("vector_search","ranking")
 
 
     return graph.compile()
