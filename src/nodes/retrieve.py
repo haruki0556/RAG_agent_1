@@ -12,7 +12,7 @@ def vector_search(query:str,vectorStore) -> Command:
 
     search_results_with_scores = vectorStore.similarity_search_with_score(query,k=SEARCH_K)
 
-    ranking = [(doc.page_content,score) for doc, score in search_results_with_scores]
+    ranking = [(doc.page_content,doc.metadata["source"],score) for doc, score in search_results_with_scores]
     #search_results_with_scoresには、list[taple[Document,float]]が入っている。
     #doc.page_contentのみが欲しいため、_でscoreを受け取っている。
 

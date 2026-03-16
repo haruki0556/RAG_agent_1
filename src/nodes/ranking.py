@@ -8,9 +8,9 @@ def ranking(state:GraphState) -> Command:
     """ランキングを行う"""
 
     ranking = state["ranking"]
-    ranked = sorted(ranking,key=lambda x:x[1],reverse=False)
+    ranked = sorted(ranking,key=lambda x:x[2],reverse=False)
     top_n = ranked[:N]
-    search_results = [doc for doc, _ in top_n]
+    search_results = [(doc, source) for doc, source, _ in top_n]
     print(f"ランキングで上位{N}件に絞れているか確認: {len(search_results)}件")
     return Command(
         update={

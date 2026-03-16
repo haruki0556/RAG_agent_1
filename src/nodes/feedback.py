@@ -22,7 +22,7 @@ def feedback(state:GraphState) -> Command:
         )
 
 
-    context = "\n\n".join([f"文書{i+1}:\n{doc}" for i,doc in enumerate(search_results)])
+    context = "\n\n".join([f"文書{i+1}:\n{doc}\n出典:{source}" for i, (doc, source) in enumerate(search_results)])
 
     class FeedbackOutput(BaseModel):
         needs_improvement:bool = Field(description="回答の改善が必要かどうか")

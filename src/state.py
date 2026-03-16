@@ -5,7 +5,7 @@ import operator
 class GraphState(TypedDict):
     user_input: str
     queries: list[str]
-    search_results:list[str]
+    search_results:list[tuple[str,str]]
     answer:str
     feedback:str
     iteration:int
