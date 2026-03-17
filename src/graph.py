@@ -24,6 +24,7 @@ def create_rag_graph(vectorStore):
     graph = StateGraph(GraphState)
 
     vector_search_with_store = partial(vector_search,vectorStore=vectorStore)
+    summarization_retrieve_with_store = partial(summarization_retrieve,vectorStore=vectorStore)
 
     graph.add_node("generate_queries",generate_queries)
     graph.add_node("vector_search",vector_search_with_store)
@@ -31,7 +32,7 @@ def create_rag_graph(vectorStore):
     graph.add_node("generate_answer",generate_answer)
     graph.add_node("feedback",feedback)
     graph.add_node("summarize",summarize)
-    graph.add_node("summarization_retrieve",summarization_retrieve)
+    graph.add_node("summarization_retrieve",summarization_retrieve_with_store)
     graph.add_node("router",router)
 
     graph.add_edge(START,"router")
