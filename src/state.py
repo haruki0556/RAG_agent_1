@@ -1,5 +1,5 @@
 from typing import Annotated
-from typing import TypedDict
+from typing import TypedDict,Literal
 import operator
 
 class GraphState(TypedDict):
@@ -10,3 +10,4 @@ class GraphState(TypedDict):
     feedback:str
     iteration:int
     ranking:Annotated[list[tuple[str,float]],operator.add]#反復処理した結果をすべて保持する
+    task:Literal["検索です","要約です"]

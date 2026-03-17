@@ -83,7 +83,7 @@ def feedback(state:GraphState) -> Command:
             update={
                 "iteration":iteration+1,
             },
-            goto=END)
+            goto="human_review")
 
 
     return Command(
