@@ -45,7 +45,7 @@ def feedback(state:GraphState) -> Command:
 
         ## 問題の種類と具体的なフィードバック
         - **検索クエリの問題**:検索結果自体が質問に関連していない、または不十分な場合
-        - retry_node: "genarate_queries"
+        - retry_node: "generate_queries"
         - feedback: "「~というキーワードで検索すべきだ」「~という観点から検索すべきだ」など具体的な検索戦略を記述"
 
         - **回答生成の問題**:回答が質問に対して適切に答えていない、または不十分な場合

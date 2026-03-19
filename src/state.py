@@ -9,5 +9,7 @@ class GraphState(TypedDict):
     answer:str
     feedback:str
     iteration:int
-    ranking:Annotated[list[tuple[str,float]],operator.add]#反復処理した結果をすべて保持する
+    ranking:Annotated[list[tuple[str,str,float]],operator.add]#反復処理した結果をすべて保持する
     task:Literal["検索です","要約です"]
+    partial_summaries:list[str]#Mapの部分要約結果を貯める
+    summary_doc:str

@@ -10,7 +10,7 @@ def router(state:GraphState) -> Command:
             update={
                 "task":"要約です"
             },
-            goto="summarization_retrieve"
+            goto="summary_select_doc"
         )
     else:
         return Command(
