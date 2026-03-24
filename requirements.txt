@@ -9,3 +9,5 @@ faiss-cpu
 pymupdf
 pypdf
 chainlit
+ragas
+langsmith
