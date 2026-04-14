@@ -19,7 +19,7 @@ from langsmith.schemas import Example, Run
 from ragas import SingleTurnSample
 from ragas.embeddings.base import LangchainEmbeddingsWrapper
 from ragas.llms.base import LangchainLLMWrapper
-from ragas.metrics import AnswerRelevancy, ContextPrecision, ContextRecall, Faithfulness
+from ragas.metrics import AnswerRelevancy, AnswerCorrectness, ContextRecall, Faithfulness
 from ragas.run_config import RunConfig
 
 from config import (
@@ -65,7 +65,10 @@ run_config = RunConfig()
 
 faithfulness_m = Faithfulness(llm=evaluator_llm)
 context_recall_m = ContextRecall(llm=evaluator_llm)
-context_precision_m = ContextPrecision(llm=evaluator_llm)
+answer_correctness_m = AnswerCorrectness(
+    llm=evaluator_llm,
+    embeddings=evaluator_embeddings,
+)
 answer_relevancy_m = AnswerRelevancy(
     llm=evaluator_llm,
     embeddings=evaluator_embeddings,
@@ -74,7 +77,7 @@ answer_relevancy_m = AnswerRelevancy(
 for _metric in (
     faithfulness_m,
     context_recall_m,
-    context_precision_m,
+    answer_correctness_m,
     answer_relevancy_m,
 ):
     _metric.init(run_config)
@@ -129,8 +132,8 @@ def context_recall_evaluator(run: Run, example: Example) -> dict:
     return _safe_score(context_recall_m, build_sample(run, example), "context_recall")
 
 
-def context_precision_evaluator(run: Run, example: Example) -> dict:
-    return _safe_score(context_precision_m, build_sample(run, example), "context_precision")
+def answer_correctness_evaluator(run: Run, example: Example) -> dict:
+    return _safe_score(answer_correctness_m, build_sample(run, example), "answer_correctness")
 
 
 def answer_relevancy_evaluator(run: Run, example: Example) -> dict:
@@ -143,11 +146,11 @@ if __name__ == "__main__":
         evaluators=[
             faithfulness_evaluator,
             context_recall_evaluator,
-            context_precision_evaluator,
+            answer_correctness_evaluator,
             answer_relevancy_evaluator,
         ],
         data=DATASET_NAME,
-        description="RAGAS: faithfulness, context_recall, context_precision, answer_relevancy",
+        description="RAGAS: faithfulness, context_recall, answer_correctness, answer_relevancy",
         max_concurrency=0,
     )
     print(result)
